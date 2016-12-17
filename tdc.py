@@ -2,6 +2,9 @@ global file
 file = None
 global rcd
 rcd = False
+global arrows
+arrows = False
+global arrowtoggle
 def forwardless():
     t.forward(25)
     if rcd == True:
@@ -94,6 +97,35 @@ def steepdiagright():
     t.right(25)
     if rcd == True:
         file.write('t.right(25)\n')
+def arrowkey():
+    global arrows
+    global arrowtoggle
+    if not arrows:
+        arrows = True
+        arrowtoggle.config(text="Arrow Key Control: ON")
+    else:
+        arrows = False
+        arrowtoggle.config(text="Arrow Key Control: OFF")
+def right(event):
+    global arrows
+    if arrows:
+        t.setheading(0)
+        t.forward(5)
+def left(event):
+    global arrows
+    if arrows:
+        t.setheading(180)
+        t.forward(5)
+def up(event):
+    global arrows
+    if arrows:
+        t.setheading(90)
+        t.forward(5)
+def down(event):
+    global arrows
+    if arrows:
+        t.setheading(270)
+        t.forward(5)
 def startrcd():
     global rcd
     rcd = True
@@ -110,7 +142,7 @@ def startrcd():
 def endrcd():
     global rcd
     global file
-    if rcd == True and file != None:
+    if rcd and file != None:
         rcd = False
         file.close()
         file = None
@@ -154,6 +186,8 @@ w = Button(tk, text="End Recording", command=endrcd)
 x = Button(tk, text="Exit", command=close)
 y = Button(tk, text="Forward 25", command=forwardless)
 z = Button(tk, text="Backward 25", command=backwardless)
+arrow = Button(tk, text="Arrow Key Control Toggle\n(only 90 degree angles)", command=arrowkey)
+arrowtoggle = Label(tk, text="Arrow Key Control: OFF")
 a.pack()
 b.pack()
 c.pack()
@@ -180,3 +214,9 @@ w.pack()
 x.pack()
 y.pack()
 z.pack()
+arrow.pack()
+arrowtoggle.pack()
+tk.bind("<Right>", right)
+tk.bind("<Left>", left)
+tk.bind("<Up>", up)
+tk.bind("<Down>", down)
