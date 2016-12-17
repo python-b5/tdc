@@ -68,19 +68,19 @@ def drop():
 def green():
     t.color(0, 128, 0)
     if rcd:
-        file.write('t.color(0, 0.5, 0)\n')
+        file.write('t.color(0, 128, 0)\n')
 def red():
     t.color(255, 0, 0)
     if rcd:
-        file.write('t.color(1, 0, 0)\n')
+        file.write('t.color(255, 0, 0)\n')
 def gold():
     t.color(230, 191, 0)
     if rcd:
-        file.write('t.color(0.9, 0.75, 0)\n')
+        file.write('t.color(230, 191, 0)\n')
 def blue():
     t.color(0, 0, 255)
     if rcd:
-        file.write('t.color(0, 0, 1)\n')
+        file.write('t.color(0, 0, 255)\n')
 def black():
     t.color(0, 0, 0)
     if rcd:
@@ -157,40 +157,40 @@ def down(event):
 def custom_forward():
     global forward_pixels
     global rcd
-    t.forward(forward_pixels.get())
+    t.forward(forward_pixels)
     if rcd:
-        file.write('t.forward(' + forward_pixels.get() + ')\n')
+        file.write('t.forward(' + str(forward_pixels) + ')\n')
 def custom_backward():
     global backward_pixels
     global rcd
-    t.backward(backward_pixels.get())
+    t.backward(backward_pixels)
     if rcd:
-        file.write('t.backward(' + backward_pixels.get() + ')\n')
+        file.write('t.backward(' + str(backward_pixels) + ')\n')
 def custom_left():
     global left_degrees
     global rcd
-    t.left(left_degrees.get())
+    t.left(left_degrees)
     if rcd:
-        file.write('t.left(' + left_degrees.get() + ')\n')
+        file.write('t.left(' + str(left_degrees) + ')\n')
 def custom_right():
     global right_degrees
     global rcd
-    t.right(right_degrees.get())
+    t.right(right_degrees)
     if rcd:
-        file.write('t.right(' + right_degrees.get() + ')\n')
+        file.write('t.right(' + str(right_degrees) + ')\n')
 def custom_circle():
     global circle_radius
     global rcd
     t.circle(circle_radius)
     if rcd:
-        file.write('t.circle(' + circle_radius + ')\n')
+        file.write('t.circle(' + str(circle_radius) + ')\n')
 def custom_color():
     global cred
     global cgreen
     global cblue
     t.color(cred, cgreen, cblue)
     if rcd:
-        file.write('t.color(' + cred + ', ' + cgreen + ', ' + ccblue + ')\n')
+        file.write('t.color(' + str(cred) + ', ' + str(cgreen) + ', ' + str(cblue) + ')\n')
 def customset():
     global cforward
     global cbackward
@@ -281,7 +281,7 @@ def startrcd():
             messagebox.showinfo('Recording Canceled', 'No file selected or created.')
             break
     if file != None:
-        file.write('import turtle\nturtle.title(\'TDC Save\')\nturtle.setup(width=1000, height=500)\nt = turtle.Pen()\n')
+        file.write('import turtle\nturtle.title(\'TDC Save\')\nturtle.setup(width=1000, height=500)\nturtle.colormode(255)\nt = turtle.Pen()\n')
         messagebox.showinfo('Started', 'Recording started.')
 def endrcd():
     global rcd
