@@ -1,5 +1,5 @@
-global save
-save = None
+global file
+file = None
 global rcd
 rcd = False
 def forwardless():
@@ -97,25 +97,23 @@ def steepdiagright():
 def startrcd():
     global rcd
     rcd = True
-    global save
-    while save == None:
-        save = filedialog.askopenfilename()
-        if save == '':
-            messagebox.showinfo('No File', 'You didn\'t select a file.')
-            save = None
+    global file
+    while file == None:
+        file = filedialog.asksaveasfile()
+        if file == '':
+            messagebox.showinfo('Recording Canceled', 'No file selected or created.')
+            file = None
             break
-    if save != None:
-        global file
-        file = open(save, 'w')
+    if file != None:
         file.write('import turtle\nturtle.title(\'TDC Save\')\nturtle.setup(width=1000, height=500)\nt = turtle.Pen()\n')
         messagebox.showinfo('Started', 'Recording started.')
 def endrcd():
     global rcd
-    global save
-    if rcd == True and save != None:
-        save = None
+    global file
+    if rcd == True and file != None:
         rcd = False
         file.close()
+        file = None
         messagebox.showinfo('Ended', 'Recording ended.')
 def close():
     if messagebox.askyesno('Exit?', 'Are you sure you wish to exit?'):
