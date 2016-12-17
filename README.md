@@ -1,4 +1,4 @@
-# tdc
+# tdc (Turtle Design Creator)
 ---
 Python 3 drawing program using Tkinter to control Turtle.
 ---
