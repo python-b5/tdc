@@ -22,4 +22,4 @@ INSTRUCTIONS FOR USE
 ---
 
 Click the buttons (they say what they do on them), and watch the turtle create the drawing.
-Some extra explaining is needed for the recording buttons, though: you will need an empty file already on your computer (this may be changed later). Then the Start Recording button will start recording Turtle code to a selected file, and the End Recording button will stop recording the code.
+Some extra explaining is needed for the recording buttons, though: The Start Recording button will start recording Turtle code to a file that is created via a save box that pops up, and the End Recording button will stop recording the code.
