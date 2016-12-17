@@ -99,7 +99,7 @@ def startrcd():
     rcd = True
     global file
     while file == None:
-        file = filedialog.asksavefile()
+        file = filedialog.asksaveasfile()
         if file == '':
             messagebox.showinfo('Recording Canceled', 'No file selected or created.')
             file = None
