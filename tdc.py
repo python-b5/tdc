@@ -131,10 +131,9 @@ def startrcd():
     rcd = True
     global file
     while file == None:
-        file = filedialog.asksaveasfile()
-        if file == '':
+        file = filedialog.asksaveasfile(mode="w", defaultextension=".py")
+        if file == None:
             messagebox.showinfo('Recording Canceled', 'No file selected or created.')
-            file = None
             break
     if file != None:
         file.write('import turtle\nturtle.title(\'TDC Save\')\nturtle.setup(width=1000, height=500)\nt = turtle.Pen()\n')
