@@ -1,6 +1,7 @@
 import turtle
 turtle.title('TDC Save')
 turtle.setup(width=1000, height=500)
+turtle.colormode(255)
 t = turtle.Pen()
 t.color(0, 0, 255)
 t.begin_fill()
