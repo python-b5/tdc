@@ -15,7 +15,7 @@ Turtle (Python 3)
 INSTALLATION
 ---
 
-Clone or download the repository, install dependencies if needed, and run tdc.py.
+Clone or download the repository (or click the download links in the DOWNLOAD section or the Releases tab), install dependencies if needed, and run tdc.py.
 
 ---
 INSTRUCTIONS FOR USE
