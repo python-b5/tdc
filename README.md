@@ -35,4 +35,5 @@ DOWNLOAD
 ---
 
 <a href="https://github.com/python-b5/tdc/archive/v1.0.zip">Download as .zip</a>
+
 <a href="https://github.com/python-b5/tdc/archive/v1.0.tar.gz">Download as .tar.gz</a>
