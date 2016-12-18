@@ -29,3 +29,10 @@ DEMO SAVES
 ---
 
 Don't redistribute these saves. They are demos made purely to show what you can do with different features. Run them (their only dependencies are Turtle (Python 3) and Python 3, along with other saves made with tdc), and...well, enjoy the art!
+
+---
+DOWNLOAD
+---
+
+Download as .zip: https://github.com/python-b5/tdc/archive/v1.0.zip
+Download as .tar.gz: https://github.com/python-b5/tdc/archive/v1.0.tar.gz
