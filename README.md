@@ -34,5 +34,5 @@ Don't redistribute these saves. They are demos made purely to show what you can 
 DOWNLOAD
 ---
 
-Download as .zip: https://github.com/python-b5/tdc/archive/v1.0.zip
-Download as .tar.gz: https://github.com/python-b5/tdc/archive/v1.0.tar.gz
+<a href="https://github.com/python-b5/tdc/archive/v1.0.zip">Download as .zip</a>
+<a href="https://github.com/python-b5/tdc/archive/v1.0.tar.gz">Download as .tar.gz</a>
