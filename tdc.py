@@ -1,9 +1,7 @@
-global file
-file = None
-global rcd
-rcd = False
+global file #Welcome to tdc's code.
+global rcd #Here, we are defining a bunch of global variables, for use later.
+global loop
 global arrows
-arrows = False
 global arrowtoggle
 global forward_pixels
 global backward_pixels
@@ -13,6 +11,11 @@ global circle_radius
 global cred
 global cgreen
 global cblue
+global looprcd
+arrows = False
+file = None
+looprcd = False
+loop = []
 forward_pixels = 1
 backward_pixels = 1
 left_degrees = 1
@@ -21,58 +24,85 @@ circle_radius = 1
 cred = 0
 cgreen = 0
 cblue = 0
-def forwardless():
-    t.forward(25)
-    if rcd:
+rcd = False
+def forwardless(): #Time for the functions!
+    t.forward(25) #Here, the correct command for the button pressed is run.
+    if rcd: #If recording, write the command to the file.
         file.write('t.forward(25)\n')
+    if looprcd: #If recording a repeat, append the command to the list.
+        loop.append('t.forward(25)') #The rest of the standard moving functions are pretty similar.     
 def backwardless():
     t.backward(25)
     if rcd:
         file.write('t.backward(25)\n')
+    if looprcd:
+        loop.append('t.backward(25)')
 def forward():
     t.forward(50)
     if rcd:
         file.write('t.forward(50)\n')
+    if looprcd:
+        loop.append('t.forward(50)')
 def left():
     t.left(90)
     if rcd:
         file.write('t.left(90)\n')
+    if looprcd:
+        loop.append('t.left(90)')
 def right():
     t.right(90)
     if rcd:
         file.write('t.right(90)\n')
+    if looprcd:
+        loop.append('t.right(90)')
 def diagleft():
     t.left(45)
     if rcd:
         file.write('t.left(45)\n')
+    if looprcd:
+        loop.append('t.left(45)')
 def diagright():
     t.right(45)
     if rcd:
         file.write('t.right(45)\n')
+    if looprcd:
+        loop.append('t.right(45)')
 def clear():
     t.reset()
     if rcd:
         file.write('t.reset()\n')
+    if looprcd:
+        loop.append('t.reset()')
 def backward():
     t.backward(50)
     if rcd:
         file.write('t.backward(50)\n')
+    if looprcd:
+        loop.append('t.backward(50)')
 def lift():
     t.up()
     if rcd:
         file.write('t.up()\n')
+    if looprcd:
+        loop.append('t.up()')
 def drop():
     t.down()
     if rcd:
         file.write('t.down()\n')
+    if looprcd:
+        loop.append('t.down()')
 def green():
     t.color(0, 128, 0)
     if rcd:
         file.write('t.color(0, 128, 0)\n')
+    if looprcd:
+        loop.append('t.color(0, 128, 0)')
 def red():
     t.color(255, 0, 0)
     if rcd:
         file.write('t.color(255, 0, 0)\n')
+    if looprcd:
+        loop.append('t.color(255, 0, 0)')
 def gold():
     t.color(230, 191, 0)
     if rcd:
@@ -81,40 +111,58 @@ def blue():
     t.color(0, 0, 255)
     if rcd:
         file.write('t.color(0, 0, 255)\n')
+    if looprcd:
+        loop.append('t.color(0, 0, 255)')
 def black():
     t.color(0, 0, 0)
     if rcd:
-        file.write('t.up()\n')
+        file.write('t.color(0, 0, 0)\n')
+    if looprcd:
+        loop.append('t.color(0, 0, 0)')
 def begin_fill():
     t.begin_fill()
     if rcd:
         file.write('t.begin_fill()\n')
+    if looprcd:
+        loop.append('t.begin_fill()')
 def end_fill():
     t.end_fill()
     if rcd:
         file.write('t.end_fill()\n')
+    if looprcd:
+        loop.append('t.end_fill()')
 def small_circle():
     t.circle(10)
     if rcd:
         file.write('t.circle(10)\n')
+    if looprcd:
+        loop.append('t.circle(10)')
 def medium_circle():
     t.circle(30)
     if rcd:
         file.write('t.circle(30)\n')
+    if looprcd:
+        loop.append('t.circle(30)')
 def large_circle():
     t.circle(50)
     if rcd:
         file.write('t.circle(50)\n')
+    if looprcd:
+        loop.append('t.circle(50)')
 def steepdiagleft():
     t.left(22.5)
     if rcd:
         file.write('t.left(22.5)\n')
+    if looprcd:
+        loop.append('t.left(22.5)')
 def steepdiagright():
     t.right(22.5)
     if rcd:
         file.write('t.right(22.5)\n')
+    if looprcd:
+        loop.append('t.right(22.5)')
 def arrowkey():
-    global arrows
+    global arrows #Arrow key control is toggled here.
     global arrowtoggle
     if not arrows:
         arrows = True
@@ -123,13 +171,16 @@ def arrowkey():
         arrows = False
         arrowtoggle.config(text="Arrow Key Control: OFF")
 def aright(event):
-    global arrows
+    global arrows #Arrow key control.
     global rcd
     if arrows:
         t.setheading(0)
         t.forward(5)
-        if rcd:
+        if rcd: #Recording is the same as basic moving.
             file.write('t.setheading(0)\nt.forward(5)\n')
+        if looprcd:
+            loop.append('t.setheading(0)')
+            loop.append('t.forward(5)') #This applies to the other arrow key movement functions as well.
 def aleft(event):
     global arrows
     global rcd
@@ -138,6 +189,9 @@ def aleft(event):
         t.forward(5)
         if rcd:
             file.write('t.setheading(180)\nt.forward(5)\n')
+        if looprcd:
+            loop.append('t.setheading(180)')
+            loop.append('t.forward(5)')
 def up(event):
     global arrows
     global rcd
@@ -146,6 +200,9 @@ def up(event):
         t.forward(5)
         if rcd:
             file.write('t.setheading(90)\nt.forward(5)\n')
+        if looprcd:
+            loop.append('t.setheading(90)')
+            loop.append('t.forward(5)')
 def down(event):
     global arrows
     global rcd
@@ -154,36 +211,49 @@ def down(event):
         t.forward(5)
         if rcd:
             file.write('t.setheading(270)\nt.forward(5)\n')
+        if looprcd:
+            loop.append('t.setheading(270)')
+            loop.append('t.forward(5)')
 def custom_forward():
-    global forward_pixels
+    global forward_pixels #Custom stuff.
     global rcd
-    t.forward(forward_pixels)
-    if rcd:
+    t.forward(forward_pixels) #Use the variables for the command
+    if rcd: #Recording is pretty similar, using the variables converted to strings.
         file.write('t.forward(' + str(forward_pixels) + ')\n')
+    if looprcd:
+        loop.append('t.forward(' + str(forward_pixels) + ')\n') #Pretty much the same for the other custom functions.
 def custom_backward():
     global backward_pixels
     global rcd
     t.backward(backward_pixels)
     if rcd:
         file.write('t.backward(' + str(backward_pixels) + ')\n')
+    if looprcd:
+        loop.append('t.backward(' + str(backward_pixels) + ')\n')
 def custom_left():
     global left_degrees
     global rcd
     t.left(left_degrees)
     if rcd:
         file.write('t.left(' + str(left_degrees) + ')\n')
+    if looprcd:
+        loop.append('t.left(' + str(left_degrees) + ')\n')
 def custom_right():
     global right_degrees
     global rcd
     t.right(right_degrees)
     if rcd:
         file.write('t.right(' + str(right_degrees) + ')\n')
+    if looprcd:
+        loop.append('t.right(' + str(right_degrees) + ')\n')
 def custom_circle():
     global circle_radius
     global rcd
     t.circle(circle_radius)
     if rcd:
         file.write('t.circle(' + str(circle_radius) + ')\n')
+    if looprcd:
+        loop.append('t.circle(' + str(circle_radius) + ')\n')
 def custom_color():
     global cred
     global cgreen
@@ -191,8 +261,10 @@ def custom_color():
     t.color(cred, cgreen, cblue)
     if rcd:
         file.write('t.color(' + str(cred) + ', ' + str(cgreen) + ', ' + str(cblue) + ')\n')
+    if looprcd:
+        loop.append('t.color(' + str(cred) + ', ' + str(cgreen) + ', ' + str(cblue) + ')\n')
 def customset():
-    global cforward
+    global cforward #Create a beautiful GUI.
     global cbackward
     global cleft
     global cright
@@ -203,34 +275,34 @@ def customset():
     global customwin
     customwin = Tk()
     customwin.title("Custom Button Settings")
-    cforward = Scale(customwin, from_=1, to=1000, label="Forward", length=1000)
-    cforward.pack(side=LEFT)
+    cforward = Scale(customwin, from_=1, to=1000, label="Forward", length=1000, orient="horizontal") #They should be horizontal. 
+    cforward.pack(side=TOP) #Pack them all vertically.
     cforward.set(forward_pixels)
-    cbackward = Scale(customwin, from_=1, to=1000, label="Backward", length=1000)
-    cbackward.pack(side=LEFT)
+    cbackward = Scale(customwin, from_=1, to=1000, label="Backward", length=1000, orient="horizontal")
+    cbackward.pack(side=TOP)
     cbackward.set(backward_pixels)
-    cleft = Scale(customwin, from_=1, to=360, label="Left", length=360)
-    cleft.pack(side=LEFT)
+    cleft = Scale(customwin, from_=1, to=360, label="Left", length=360, orient="horizontal")
+    cleft.pack(side=TOP)
     cleft.set(left_degrees)
-    cright = Scale(customwin, from_=1, to=360, label="Right", length=360)
-    cright.pack(side=LEFT)
+    cright = Scale(customwin, from_=1, to=360, label="Right", length=360, orient="horizontal")
+    cright.pack(side=TOP)
     cright.set(right_degrees)
-    ccircle = Scale(customwin, from_=1, to=500, label="Circle", length=500)
-    ccircle.pack(side=LEFT)
+    ccircle = Scale(customwin, from_=1, to=500, label="Circle", length=500, orient="horizontal")
+    ccircle.pack(side=TOP)
     ccircle.set(circle_radius)
-    r = Scale(customwin, from_=0, to=255, label="Color: Red", length=256)
-    r.pack(side=LEFT)
+    r = Scale(customwin, from_=0, to=255, label="Color: Red", length=256, orient="horizontal")
+    r.pack(side=TOP)
     r.set(cred)
-    g = Scale(customwin, from_=0, to=255, label="Color: Green", length=256)
-    g.pack(side=LEFT)
+    g = Scale(customwin, from_=0, to=255, label="Color: Green", length=256, orient="horizontal")
+    g.pack(side=TOP)
     g.set(cgreen)
-    b = Scale(customwin, from_=0, to=255, label="Color: Blue", length=256)
-    b.pack(side=LEFT)
+    b = Scale(customwin, from_=0, to=255, label="Color: Blue", length=256, orient="horizontal")
+    b.pack(side=TOP)
     b.set(cblue)
-    confirm = Button(customwin, text="Apply", command=apply)
+    confirm = Button(customwin, text="Apply", command=apply) #A button, for application of the settings.
     confirm.pack(side=BOTTOM)
 def apply():
-    global cforward
+    global cforward #Applying the custom settings.
     global cbackward
     global cleft
     global cright
@@ -247,7 +319,7 @@ def apply():
     global cred
     global cgreen
     global cblue
-    forward_pixels = cforward.get()
+    forward_pixels = cforward.get() #Each sustom variable is set to the get value of the slider.
     backward_pixels = cbackward.get()
     left_degrees = cleft.get()
     right_degrees = cright.get()
@@ -257,7 +329,7 @@ def apply():
     cblue = b.get()
     customwin.destroy()
 def custombtn():
-    launch = Tk()
+    launch = Tk() #Buttons to use the custom functions.
     launch.title("Custom Buttons")
     btn_cforward = Button(launch, text="Forward", command=custom_forward)
     btn_cforward.pack()
@@ -272,11 +344,11 @@ def custombtn():
     btn_ccolor = Button(launch, text="Color", command=custom_color)
     btn_ccolor.pack()
 def startrcd():
-    global rcd
+    global rcd #Start recording.
     rcd = True
     global file
     while file == None:
-        file = filedialog.asksaveasfile(mode="w", defaultextension=".py")
+        file = filedialog.asksaveasfile(mode="w", defaultextension=".py") #Save as file, open it in write mode.
         if file == None:
             messagebox.showinfo('Recording Canceled', 'No file selected or created.')
             break
@@ -284,28 +356,62 @@ def startrcd():
         file.write('import turtle\nturtle.title(\'TDC Save\')\nturtle.setup(width=1000, height=500)\nturtle.colormode(255)\nt = turtle.Pen()\n')
         messagebox.showinfo('Started', 'Recording started.')
 def endrcd():
-    global rcd
+    global rcd #Close the file.
     global file
     if rcd and file != None:
         rcd = False
         file.close()
         file = None
         messagebox.showinfo('Ended', 'Recording ended.')
+def repeatrcd():
+    global looprcd #Start recording a repeat.
+    global loop
+    if not looprcd:
+        looprcd = True
+        messagebox.showinfo('Repeat Recording', 'Recording started.')
+        loop = [] #Reset the repeat list.
+    else:
+        looprcd = False
+        messagebox.showinfo('Repeat Recording', 'Recording ended.')
+def repeatexecute():
+    global loop #Run the repeat.
+    global looprcd
+    if not looprcd:
+        for i in loop:
+            exec(i) #Execute every command in the list.
+def repeat():
+    repeatwin = Tk() #A GUI for the repeat functions.
+    repeatwin.title("Repeats")
+    rcdrepeat = Button(repeatwin, text="Toggle Recording", command=repeatrcd)
+    rcdrepeat.pack()
+    runrepeat = Button(repeatwin, text="Run Repeat", command=repeatexecute)
+    runrepeat.pack()
 def close():
-    if messagebox.askyesno('Exit?', 'Are you sure you wish to exit?'):
+    if messagebox.askyesno('Exit?', 'Are you sure you wish to exit?'): #Exit tdc.
         messagebox.showinfo('Closing', 'TDC is closing.')
         exit()
-import turtle
+def onframeconfigure(canvas):
+    canvas.configure(scrollregion=canvas.bbox("all")) #Configure a given canvas.
+import turtle #Setting up the main GUI.
 import tkinter.messagebox
 from tkinter import filedialog
-turtle.setup(width=1000, height=500)
+turtle.setup(width=1000, height=500) #Setting up the turtle window.
 turtle.colormode(255)
 turtle.title('Turtle Design Creator')
 t = turtle.Pen()
-from tkinter import *
-tk = Tk()
-tk.title("Toolbox")
-a = Button(tk, text="Forward 50", command=forward)
+from tkinter import * #Setting up the Toolbox window.
+toolbox = Tk()
+toolbox.title("Toolbox")
+toolbox.geometry("200x500")
+canvas = Canvas(toolbox, borderwidth=0) #Making a scrollbar.
+tk = Frame(canvas)
+scroll = Scrollbar(tk, orient="vertical", command=canvas.yview)
+canvas.configure(yscrollcommand=scroll.set)
+scroll.pack(side="right", fill="y")
+canvas.pack(side="left", fill="both", expand=True)
+canvas.create_window((4, 4), window=tk, anchor="nw")
+tk.bind("<Configure>", lambda event, canvas=canvas: onframeconfigure(canvas))
+a = Button(tk, text="Forward 50", command=forward) #All the buttons for different functions.
 b = Button(tk, text="Left 90", command=left)
 c = Button(tk, text="Right 90", command=right)
 d = Button(tk, text="Left 45", command=diagleft)
@@ -334,8 +440,9 @@ z = Button(tk, text="Backward 25", command=backwardless)
 custom = Button(tk, text="Custom Button Settings", command=customset)
 customlaunch = Button(tk, text="Custom Buttons", command=custombtn)
 arrow = Button(tk, text="Arrow Key Control Toggle\n(only 90 degree angles)", command=arrowkey)
-arrowtoggle = Label(tk, text="Arrow Key Control: OFF")
-a.pack()
+arrowtoggle = Label(tk, text="Arrow Key Control: OFF") #Text for the status of arrow key control.
+repeats = Button(tk, text="Repeats", command=repeat)
+a.pack() #Packing everything in the Toolbox window.
 b.pack()
 c.pack()
 d.pack()
@@ -365,7 +472,9 @@ arrow.pack()
 arrowtoggle.pack()
 custom.pack()
 customlaunch.pack()
-tk.bind("<Right>", aright)
-tk.bind("<Left>", aleft)
-tk.bind("<Up>", up)
-tk.bind("<Down>", down)
+repeats.pack()
+toolbox.bind("<Right>", aright) #Binding the arrow keys to the arrow key control functions.
+toolbox.bind("<Left>", aleft)
+toolbox.bind("<Up>", up)
+toolbox.bind("<Down>", down)
+mainloop() #...And a main loop. That's everything for the code of tdc!
